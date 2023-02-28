@@ -5,5 +5,5 @@ namespace TodoApi.Context;
 
 public interface IAppContext
 {
-    DbSet<Todo> Todos {get;}
+    DbSet<Todo> Todos {get; set;}
 }

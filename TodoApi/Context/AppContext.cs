@@ -7,5 +7,5 @@ public class AppDbContext : DbContext, IAppContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
 
-    public DbSet<Todo> Todos {get;}
+    public DbSet<Todo> Todos {get; set;}
 }
