@@ -6,21 +6,29 @@ using Microsoft.EntityFrameworkCore;
 namespace TodoApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class TodoController : ControllerBase
 {
-    private readonly IAppContext _context;
+    private readonly AppDbContext _context;
 
-    public TodoController(IAppContext context)
+    public TodoController(AppDbContext context)
     {
         _context = context;
     }
 
     [HttpPost]
+    [Route("create")]
     public async Task<ActionResult<int>> CreateTodo(Todo todo)
     {
-       await _context.Todos.AddAsync(todo);
-       return Created("", todo.Id);
+        try
+        {
+            await _context.Todos.AddAsync(todo);
+            return Created("", todo.Id);
+        }
+        catch(Exception ex)
+        {
+            return Ok(ex);
+        }
     }
 
     [HttpGet("{id}")]
