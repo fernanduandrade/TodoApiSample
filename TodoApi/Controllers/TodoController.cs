@@ -16,6 +16,16 @@ public class TodoController : ControllerBase
         _context = context;
     }
 
+    [HttpGet]
+    public async Task<ActionResult<int>> GetAllTodo()
+    {
+       var result = await _context.Todos
+        .AsNoTracking()
+        .ToListAsync();
+
+       return Ok(result);
+    }
+
     [HttpPost]
     public async Task<ActionResult<int>> CreateTodo(Todo todo)
     {
@@ -37,16 +47,6 @@ public class TodoController : ControllerBase
        var result = await _context.Todos
         .AsNoTracking()
         .FirstOrDefaultAsync(todo => todo.Id == id);
-
-       return Ok(result);
-    }
-
-    [HttpGet]
-    public async Task<ActionResult<int>> GetAllTodo()
-    {
-       var result = await _context.Todos
-        .AsNoTracking()
-        .ToListAsync();
 
        return Ok(result);
     }

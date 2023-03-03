@@ -40,12 +40,8 @@ public class ClientFixture : IClassFixture<WebApiFactoryConfig<Program, AppDbCon
     }
 
     public async Task<HttpResponseMessage> AsGetAsync(string url)
-    {
-        return await Client.GetAsync(url);
-    }
+        => await Client.GetAsync(url);
 
     public async Task<HttpResponseMessage> AsDeleteAsync(string url)
-    {   
-        return await Client.DeleteAsync(url);
-    }
+        => await Client.DeleteAsync(url);
 }

@@ -24,7 +24,6 @@ public class TodoControllerTest : ClientFixture
         // Act
         var response = await AsPostAsync("api/Todo/", todo);
         var resultId = Int32.Parse(await response.Content.ReadAsStringAsync());
-
         // Assert
         Assert.True(resultId > 0);
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);

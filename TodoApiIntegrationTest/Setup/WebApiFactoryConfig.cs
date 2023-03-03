@@ -33,7 +33,6 @@ public class WebApiFactoryConfig<TProgram, TDbContext> :
             if (descriptor != null) services.Remove(descriptor);
             services.AddDbContext<TDbContext>(options => { options.UseNpgsql(_container.ConnectionString); });
             
-
             var serviceProvider = services.BuildServiceProvider();
 
             using var scope = serviceProvider.CreateScope();
@@ -45,11 +44,7 @@ public class WebApiFactoryConfig<TProgram, TDbContext> :
         });
     }
 
-
-    public async Task InitializeAsync()
-    {
-        await _container.StartAsync();
-    }
+    public async Task InitializeAsync() => await _container.StartAsync();
 
     public new async Task DisposeAsync() => await _container.DisposeAsync();
 }
